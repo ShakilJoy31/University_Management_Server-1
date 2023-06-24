@@ -5,6 +5,7 @@ import handleValidationError from '../../errors/handleValidationError';
 import ApiError from '../../errors/ApiErrors';
 import { ZodError } from 'zod';
 import handleZodError from '../../errors/handleZodError';
+import handleCastError from '../../errors/handleCastError';
 
 const globalErrorHandler: ErrorRequestHandler = (
   error,
@@ -22,7 +23,12 @@ const globalErrorHandler: ErrorRequestHandler = (
     // message = simplifiedError.message;
     message = 'Something went wrong!!!';
     errorMessages = simplifiedError.errorMessages;
-  } else if (error instanceof ZodError) {
+  }else if(error?.name === 'CastError'){
+    const simplifiedError = handleCastError(error);
+    statusCode = simplifiedError.statusCode;
+    message = simplifiedError.message;
+    errorMessages= simplifiedError.errorMessage;
+  }else if (error instanceof ZodError) {
     const simplifiedError = handleZodError(error);
     statusCode = simplifiedError.statusCode;
     message = simplifiedError.message;
@@ -56,8 +62,8 @@ const globalErrorHandler: ErrorRequestHandler = (
     errorMessages,
     stack: config.env !== 'production' ? error?.stack : undefined,
   });
-
-  next();
+  // After deleting the next() function the Postman is showing the error message a different way. 
+  // next();
 };
 
 export default globalErrorHandler;

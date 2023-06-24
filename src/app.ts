@@ -14,11 +14,6 @@ app.use(express.urlencoded({ extended: true }))
 // Application Route.
 app.use('/api/v1/', routes);
 
-// app.use('/api/v1', userRouter)
-// app.use('/api/v1', AcademicSemesterRoute)
-
-// Error handler
-
 // Global Error handler
 app.use(globalErrorHandler);
 

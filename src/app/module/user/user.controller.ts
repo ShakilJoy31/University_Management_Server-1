@@ -12,10 +12,6 @@ const createUserController :RequestHandler = async (req, res, next) =>{
         })
     }catch(err){
         next(err);
-        // res.status(400).json({
-        //     success: false,
-        //     message: 'Failed to create user'
-        // })
     }
 }
 
