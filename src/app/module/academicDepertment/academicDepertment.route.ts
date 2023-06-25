@@ -13,6 +13,6 @@ router.get('/:id',AcademicDepartmentController.getParticularDepartment);
 
 router.delete('/:id', AcademicDepartmentController.deleteParticularDepartment); 
 
-router.patch('/:id', AcademicDepartmentController.updateDepartment)
+router.patch('/:id',validateRequest(academicDepartmentValidation.updateAcademicDepartmentZodSchema), AcademicDepartmentController.updateDepartment)
 
 export const AcademicDepartmentRoute = router;

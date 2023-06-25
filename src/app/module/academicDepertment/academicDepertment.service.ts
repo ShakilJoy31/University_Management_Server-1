@@ -8,7 +8,7 @@ import { IAcademicDepartment } from "./academicDepertment.interface";
 import { AcademicDepartment } from "./academicDepertment.model"
 
 const createDepartment = async (payload: IAcademicDepartment):Promise<IAcademicDepartment> =>{
-    const result = await AcademicDepartment.create(payload);
+    const result = (await AcademicDepartment.create(payload)).populate('academicFaculty');
     return result;
 }
 
@@ -42,7 +42,7 @@ const getAllDepartment = async (filters:IAcademicSemesterFilters, paginationOpti
         sortConditions[sortBy] = sortOrder;
     }
     const whereConditions = andConditions.length>0 ? {$and: andConditions} : {};
-    const result = await AcademicDepartment.find(whereConditions).sort(sortConditions).skip(skip).limit(limit); 
+    const result = await AcademicDepartment.find(whereConditions).populate('academicFaculty').sort(sortConditions).skip(skip).limit(limit); 
     const total = await AcademicDepartment.countDocuments();
 
     return {
@@ -54,7 +54,7 @@ const getAllDepartment = async (filters:IAcademicSemesterFilters, paginationOpti
 }
 
 const getParticularDepartment = async(id:string) =>{
-    const result = AcademicDepartment.findById(id);
+    const result = (await AcademicDepartment.findById(id))?.populate('academicFaculty');
     return result;
 }
 
@@ -64,7 +64,7 @@ const deleteParticularDepartment = (id: string) =>{
 }
 
 const updateDepartment = async (id:string, payload: IAcademicDepartment) =>{
-    const result = await AcademicDepartment.findOneAndUpdate({_id: id}, payload, {new: true})
+    const result = await AcademicDepartment.findOneAndUpdate({_id: id}, payload, {new: true}).populate('academicFaculty')
     return result;
 }
 

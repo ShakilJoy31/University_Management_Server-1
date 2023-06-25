@@ -20,7 +20,10 @@ export const userSchema = new Schema<IUser>({
     }
   }, {
     // Automatic give the field called createdAt and updatedAt
-    timestamps: true
+    timestamps: true,
+    toJSON:{
+      virtuals: true
+  }
   });
 
 export const User = model<IUser, UserModel>('User', userSchema);
