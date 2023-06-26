@@ -1,10 +1,10 @@
 import { RequestHandler } from "express"
 import userService from './users.service' 
 
-const createUserController :RequestHandler = async (req, res, next) =>{
+const createStudentController :RequestHandler = async (req, res, next) =>{
     try{
-        const {...user} = req.body;
-        const result = await userService.createUser(user);
+        const {student, ...userData} = req.body;
+        const result = await userService.createStudent(student, userData);
         res.status(200).json({
             success: true,
             message: 'User created successfully!',
@@ -16,5 +16,5 @@ const createUserController :RequestHandler = async (req, res, next) =>{
 }
 
 export default {
-    createUserController
+    createStudentController
 }

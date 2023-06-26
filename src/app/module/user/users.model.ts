@@ -17,7 +17,13 @@ export const userSchema = new Schema<IUser>({
     password: {
         type: String,
         required: true
+    },
+    // User is referencing student and student is referencing --> faculty, department, and semester.
+    student: {
+      type: Schema.Types.ObjectId,
+      ref: 'Student'
     }
+
   }, {
     // Automatic give the field called createdAt and updatedAt
     timestamps: true,
