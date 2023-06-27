@@ -1,18 +1,17 @@
 import { SortOrder } from "mongoose";
 import { paginationHelpers } from "../../../helper/paginationHelper";
-import { IGenericResponse } from "../../../interfaces/common";
 import { IPaginationOptions } from "../../../interfaces/pagination";
 import { IAcademicSemesterFilters } from "../academicSemester/academicSemester.interface";
 import { academicDepartmentSearchAbleFields } from "./academicDepertment.constants";
 import { IAcademicDepartment } from "./academicDepertment.interface";
 import { AcademicDepartment } from "./academicDepertment.model"
 
-const createDepartment = async (payload: IAcademicDepartment):Promise<IAcademicDepartment> =>{
+const createDepartment = async (payload: IAcademicDepartment) =>{
     const result = (await AcademicDepartment.create(payload)).populate('academicFaculty');
     return result;
 }
 
-const getAllDepartment = async (filters:IAcademicSemesterFilters, paginationOptions: IPaginationOptions):Promise<IGenericResponse<IAcademicDepartment[]>> =>{
+const getAllDepartment = async (filters:IAcademicSemesterFilters, paginationOptions: IPaginationOptions) =>{
     const {searchTerm, ...filtersData} = filters;
     const {page, limit, skip, sortBy, sortOrder} = paginationHelpers.calculatePagination(paginationOptions);
 
