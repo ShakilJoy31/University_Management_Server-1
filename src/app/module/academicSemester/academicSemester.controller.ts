@@ -34,6 +34,7 @@ const getAllSemesters: RequestHandler = async (
 ) => {
   try {
     const filters = pick(req.query, academicSemesterFilterableFields);
+    
     const paginationOption = pick(req.query, [
       'page',
       'limit',

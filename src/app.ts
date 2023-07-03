@@ -1,3 +1,6 @@
+/*
+APIs--> https://university-management-backend-1-yfcr.onrender.com/api/v1/students
+*/
 import express, { Application, NextFunction, Request, Response } from 'express'
 import cors from 'cors'
 import globalErrorHandler from './app/middlewares/globalErrorHandlers'
@@ -31,13 +34,6 @@ app.use((req:Request, res: Response, next: NextFunction)=>{
     })
     next();
 })
-
-
-// const testId = async () =>{
-//     const testId = await generateFacultyId();
-//     console.log(testId);
-// }
-// testId();
 
 
 export default app
