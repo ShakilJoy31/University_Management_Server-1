@@ -7,7 +7,7 @@ import { StudentRoutes } from '../module/student/student.route';
 
 const router = express.Router()
 
-const moduleRoutes = [
+const moduleRoutes = [ 
     {
         path: '/users',
         route: userRouter
